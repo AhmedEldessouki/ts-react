@@ -7,18 +7,28 @@ export default function PlayGround() {
 
   return (
     <>
+      <h1 style={{ fontSize: '88px', margin: '0', paddingBottom: '20px' }}>
+        Tic Tak Teo
+      </h1>
       {!play ? (
-        <button
-          type='button'
-          style={{
-            background: 'dodgerblue',
-            color: 'whitesmoke',
-            scale: '150%',
-          }}
-          onClick={() => setPlay(true)}
-        >
-          Game Start
-        </button>
+        <>
+          <button
+            type='button'
+            style={{
+              color: 'whitesmoke',
+              background: 'transparent',
+              border: `4.75px solid white`,
+              fontSize: '72px',
+              fontFamily: 'cursive',
+              padding: '21px',
+              borderRadius: `20%`,
+              width: '42%',
+            }}
+            onClick={() => setPlay(true)}
+          >
+            Game Start
+          </button>
+        </>
       ) : (
         <Bored play={play} />
       )}

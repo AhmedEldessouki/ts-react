@@ -7,6 +7,7 @@ export default function Bored({ play }) {
   const [mrHandler, setMrHandler] = useState({
     turn: 'X',
     player: true,
+    isWinner: false,
   });
   const [boxes, setBoxes] = useState([
     null,
@@ -39,6 +40,7 @@ export default function Bored({ play }) {
         if (mrHandler.turn === 'X') {
           setMrHandler({
             ...mrHandler,
+            isWinner: true,
             player: true,
           });
           setWinnerX(winnerX + 1);
@@ -46,6 +48,7 @@ export default function Bored({ play }) {
         } else {
           setMrHandler({
             ...mrHandler,
+            isWinner: true,
             player: false,
           });
           setWinnerO(winnerO + 1);
@@ -60,6 +63,7 @@ export default function Bored({ play }) {
         boxes[a] !== boxes[c]
       ) {
         setNoOfClicks(noOfClicks * 0);
+        setMrHandler({ ...mrHandler, isWinner: true });
         return [setBoxes([...Array(9).fill('')])];
       }
     });
@@ -70,30 +74,38 @@ export default function Bored({ play }) {
     if (!boxes[i] && mrHandler.player) {
       boxes[i] = 'X';
       console.log(`${i} - ${boxes[i]} and`);
-      setMrHandler({ ...mrHandler, player: false, turn: 'O' });
+      setMrHandler({ isWinner: false, player: false, turn: 'O' });
       whoWon();
     } else if (!boxes[i] && !mrHandler.player) {
       boxes[i] = 'O';
-      setMrHandler({ ...mrHandler, player: true, turn: 'X' });
+      setMrHandler({ isWinner: false, player: true, turn: 'X' });
       whoWon();
       console.log('after whoWon O  ' + boxes);
-    } else {
-      throw new Error('Something Went Wrong');
     }
   }
-
   return (
     <div
       style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr',
+        display: 'flex',
+        flexWrap: 'wrap',
         width: '100%',
-        placeItems: 'center',
+        height: '100vmin',
+        justifyContent: 'space-evenly',
+        justifyItems: 'center',
       }}
     >
-      <div>
-        <h1 style={{ fontSize: '4rem', textAlign: 'center' }}>Turn</h1>
-        <h2 style={{ textAlign: 'center', fontSize: '7rem' }}>
+      <div
+        style={{
+          backgroundColor: `rgba(70,149,255, 0.1)`,
+          padding: '30px',
+          height: '240px',
+          width: '240px',
+        }}
+      >
+        <h1 style={{ fontSize: '4rem', textAlign: 'center', margin: '0' }}>
+          Turn
+        </h1>
+        <h2 style={{ textAlign: 'center', fontSize: '7rem', margin: '0' }}>
           {mrHandler.turn}
         </h2>
       </div>
@@ -103,7 +115,8 @@ export default function Bored({ play }) {
           flexWrap: 'wrap',
           justifyContent: 'center',
           alignItems: 'center',
-          width: '300px',
+          maxWidth: '300px',
+          maxHeight: '300px',
         }}
       >
         {boxes.map((data, i) => (
@@ -111,10 +124,18 @@ export default function Bored({ play }) {
             key={i}
             type='submit'
             style={{
-              width: '100px',
-              height: '100px',
+              minWidth: '100px',
+              minHeight: '100px',
               fontSize: '5rem',
               fontWeight: 'bolder',
+              margin: '0',
+              background:
+                data && data === 'X'
+                  ? '#282829'
+                  : data === 'O'
+                  ? 'white'
+                  : 'white',
+              color: data && data === 'X' ? 'white' : '#282829',
             }}
             onClick={() => onClickHandler(i)}
           >
@@ -122,24 +143,57 @@ export default function Bored({ play }) {
           </button>
         ))}
       </div>
-      <div>
-        <h1>Score Bored</h1>
-        <ul>
-          <li>
-            <h2>X</h2>
-          </li>
-          <li>
-            <h3>{winnerX}</h3>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <h2>O</h2>
-          </li>
-          <li>
-            <h3>{winnerO}</h3>
-          </li>
-        </ul>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: `row`,
+          flexWrap: 'wrap',
+          backgroundColor: `rgba(70,149,255, 0.1)`,
+          padding: '30px',
+          height: '240px',
+          width: '240px',
+        }}
+      >
+        <h1
+          style={{
+            margin: '0',
+            width: '100%',
+            fontSize: '50px',
+            fontWeight: '500',
+          }}
+        >
+          Score Bored
+        </h1>
+        <div style={{ width: '50%' }}>
+          <h2 style={{ margin: '0', fontSize: '40px', fontWeight: '400' }}>
+            X
+          </h2>
+          <h3
+            style={{
+              margin: '0',
+              fontSize: '30px',
+              fontFamily: 'monospace',
+              fontWeight: '300',
+            }}
+          >
+            {winnerX}
+          </h3>
+        </div>
+        <div style={{ width: '50%' }}>
+          <h2 style={{ margin: '0', fontSize: '40px', fontWeight: '400' }}>
+            O
+          </h2>
+          <h3
+            style={{
+              margin: '0',
+              fontSize: '30px',
+              fontFamily: 'monospace',
+              fontWeight: '300',
+            }}
+          >
+            {winnerO}
+          </h3>
+        </div>
       </div>
     </div>
   );
