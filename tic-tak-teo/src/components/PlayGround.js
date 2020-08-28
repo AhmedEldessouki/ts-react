@@ -7,7 +7,7 @@ export default function PlayGround() {
 
   return (
     <>
-      {play ? (
+      {!play ? (
         <button
           type='button'
           style={{
