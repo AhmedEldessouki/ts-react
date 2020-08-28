@@ -100,6 +100,7 @@ export default function Bored({ play }) {
           padding: '30px',
           height: '240px',
           width: '240px',
+          margin: '1.9%',
         }}
       >
         <h1 style={{ fontSize: '4rem', textAlign: 'center', margin: '0' }}>
@@ -117,6 +118,7 @@ export default function Bored({ play }) {
           alignItems: 'center',
           maxWidth: '300px',
           maxHeight: '300px',
+          margin: '1.9%',
         }}
       >
         {boxes.map((data, i) => (
@@ -152,6 +154,7 @@ export default function Bored({ play }) {
           padding: '30px',
           height: '240px',
           width: '240px',
+          margin: '1.9%',
         }}
       >
         <h1
