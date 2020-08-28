@@ -158,7 +158,7 @@ export default function Bored({ play }) {
           style={{
             margin: '0',
             width: '100%',
-            fontSize: '50px',
+            fontSize: '48px',
             fontWeight: '500',
           }}
         >
