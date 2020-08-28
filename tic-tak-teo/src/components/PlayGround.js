@@ -18,9 +18,9 @@ export default function PlayGround() {
               color: 'whitesmoke',
               background: 'transparent',
               border: `4.75px solid white`,
-              fontSize: '72px',
+              fontSize: '259%',
               fontFamily: 'cursive',
-              padding: '21px',
+              padding: '0.8%',
               borderRadius: `20%`,
               width: '42%',
             }}
