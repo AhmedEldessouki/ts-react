@@ -1,13 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Square from './components/Square';
+import Bored from './components/bored';
+import Player2 from './components/Player2';
 
 function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <Square />
+        <Bored />
+        <Player2 />
       </header>
     </div>
   );
