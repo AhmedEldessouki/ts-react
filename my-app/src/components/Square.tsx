@@ -13,7 +13,7 @@ export default function Square() {
   const [player2, setPlayer2] = useState(false);
   const [player, setPlayer] = useState(false);
   const valueSet = ['', '', '', '', '', '', '', '', ''];
-  let newArray: object = {
+  let newArray: any = {
     box0: '',
     box1: '',
     box2: '',
@@ -37,7 +37,7 @@ export default function Square() {
   }
 
   function printMeThis(valueSet: any) {
-    for (let item of valueSet) {
+    for (const item of valueSet) {
       return (
         <button onMouseDown={handleClick(item)} type='button'>
           {item}

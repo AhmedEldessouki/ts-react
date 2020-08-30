@@ -1,11 +1,13 @@
-import React from 'react';
-import './App.css';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import PlayGround from './components/PlayGround';
+
+import { app, appHeader } from './styles';
 
 function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>
+    <div css={app}>
+      <header css={appHeader}>
         <PlayGround />
       </header>
     </div>

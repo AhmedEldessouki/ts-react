@@ -1,4 +1,18 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
+import { useState } from 'react';
+import {
+  outerWrapper,
+  innerWrapper1,
+  innerWrapperBored,
+  innerWrapperScore,
+  h2XL,
+  h2L,
+  h3L,
+  h4L,
+  sPaN,
+  btn2Bored,
+} from '../styles';
 
 export default function Bored({ play }) {
   const [noOfClicks, setNoOfClicks] = useState(0);
@@ -44,7 +58,7 @@ export default function Bored({ play }) {
             player: true,
           });
           setWinnerX(winnerX + 1);
-          [setBoxes([...Array(9).fill('')])];
+          setBoxes([...Array(9).fill('')]);
         } else {
           setMrHandler({
             ...mrHandler,
@@ -53,7 +67,7 @@ export default function Bored({ play }) {
           });
           setWinnerO(winnerO + 1);
         }
-        [setBoxes([...Array(9).fill('')])];
+        setBoxes([...Array(9).fill('')]);
       } else if (
         noOfClicks === 8 &&
         boxes[a] &&
@@ -64,7 +78,7 @@ export default function Bored({ play }) {
       ) {
         setNoOfClicks(noOfClicks * 0);
         setMrHandler({ ...mrHandler, isWinner: true });
-        [setBoxes([...Array(9).fill('')])];
+        setBoxes([...Array(9).fill('')]);
       }
     });
   }
@@ -84,53 +98,18 @@ export default function Bored({ play }) {
     }
   }
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        width: '100%',
-        justifyContent: 'space-evenly',
-        justifyItems: 'center',
-        paddingBottom: '30px',
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: `rgba(70,149,255, 0.1)`,
-          padding: '30px',
-          height: '240px',
-          width: '240px',
-          margin: '1.9%',
-        }}
-      >
-        <h1 style={{ fontSize: '4rem', textAlign: 'center', margin: '0' }}>
-          Turn
-        </h1>
-        <h2 style={{ textAlign: 'center', fontSize: '7rem', margin: '0' }}>
-          {mrHandler.turn}
-        </h2>
+    <div css={outerWrapper}>
+      <div css={innerWrapper1}>
+        <h2 css={h2XL}>Turn</h2>
+        <span css={sPaN}>{mrHandler.turn}</span>
       </div>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          alignItems: 'center',
-          maxWidth: '300px',
-          maxHeight: '300px',
-          margin: '1.9%',
-        }}
-      >
+      <div css={innerWrapperBored}>
         {boxes.map((data, i) => (
           <button
             key={i}
             type='submit'
+            css={btn2Bored}
             style={{
-              minWidth: '100px',
-              minHeight: '100px',
-              fontSize: '5rem',
-              fontWeight: 'bolder',
-              margin: '0',
               background:
                 data && data === 'X'
                   ? '#282829'
@@ -146,56 +125,22 @@ export default function Bored({ play }) {
         ))}
       </div>
       <div
+        css={innerWrapper1}
         style={{
           display: 'flex',
           flexDirection: `row`,
           flexWrap: 'wrap',
-          backgroundColor: `rgba(70,149,255, 0.1)`,
-          padding: '30px',
-          height: '240px',
-          width: '240px',
-          margin: '1.9%',
+          alignContent: 'space-around',
         }}
       >
-        <h1
-          style={{
-            margin: '0',
-            width: '100%',
-            fontSize: '48px',
-            fontWeight: '500',
-          }}
-        >
-          Score Bored
-        </h1>
-        <div style={{ width: '50%' }}>
-          <h2 style={{ margin: '0', fontSize: '40px', fontWeight: '400' }}>
-            X
-          </h2>
-          <h3
-            style={{
-              margin: '0',
-              fontSize: '30px',
-              fontFamily: 'monospace',
-              fontWeight: '300',
-            }}
-          >
-            {winnerX}
-          </h3>
+        <h2 css={h2L}>Score Bored</h2>
+        <div css={innerWrapperScore}>
+          <h3 css={h3L}>X</h3>
+          <h4 css={h4L}>{winnerX}</h4>
         </div>
-        <div style={{ width: '50%' }}>
-          <h2 style={{ margin: '0', fontSize: '40px', fontWeight: '400' }}>
-            O
-          </h2>
-          <h3
-            style={{
-              margin: '0',
-              fontSize: '30px',
-              fontFamily: 'monospace',
-              fontWeight: '300',
-            }}
-          >
-            {winnerO}
-          </h3>
+        <div css={innerWrapperScore}>
+          <h3 css={h3L}>O</h3>
+          <h4 css={h4L}>{winnerO}</h4>
         </div>
       </div>
     </div>
