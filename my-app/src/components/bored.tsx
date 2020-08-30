@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Bored({ play }) {
+export default function Bored() {
   const [noOfClicks, setNoOfClicks] = useState(0);
   const [winnerX, setWinnerX] = useState(0);
   const [winnerO, setWinnerO] = useState(0);
@@ -9,17 +9,7 @@ export default function Bored({ play }) {
     player: true,
     isWinner: false,
   });
-  const [boxes, setBoxes] = useState([
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-  ]);
+  const [boxes, setBoxes] = useState(['', '', '', '', '', '', '', '', '']);
   const winableLines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -44,7 +34,7 @@ export default function Bored({ play }) {
             player: true,
           });
           setWinnerX(winnerX + 1);
-          [setBoxes([...Array(9).fill('')])];
+          setBoxes([...Array(9).fill('')]);
         } else {
           setMrHandler({
             ...mrHandler,
@@ -53,7 +43,7 @@ export default function Bored({ play }) {
           });
           setWinnerO(winnerO + 1);
         }
-        [setBoxes([...Array(9).fill('')])];
+        setBoxes([...Array(9).fill('')]);
       } else if (
         noOfClicks === 8 &&
         boxes[a] &&
@@ -64,12 +54,12 @@ export default function Bored({ play }) {
       ) {
         setNoOfClicks(noOfClicks * 0);
         setMrHandler({ ...mrHandler, isWinner: true });
-        [setBoxes([...Array(9).fill('')])];
+        setBoxes([...Array(9).fill('')]);
       }
     });
   }
 
-  function onClickHandler(i) {
+  function onClickHandler(i: number) {
     setNoOfClicks(noOfClicks + 1);
     if (!boxes[i] && mrHandler.player) {
       boxes[i] = 'X';
@@ -92,8 +82,7 @@ export default function Bored({ play }) {
         justifyContent: 'space-evenly',
         justifyItems: 'center',
         paddingBottom: '30px',
-      }}
-    >
+      }}>
       <div
         style={{
           backgroundColor: `rgba(70,149,255, 0.1)`,
@@ -101,8 +90,7 @@ export default function Bored({ play }) {
           height: '240px',
           width: '240px',
           margin: '1.9%',
-        }}
-      >
+        }}>
         <h1 style={{ fontSize: '4rem', textAlign: 'center', margin: '0' }}>
           Turn
         </h1>
@@ -119,8 +107,7 @@ export default function Bored({ play }) {
           maxWidth: '300px',
           maxHeight: '300px',
           margin: '1.9%',
-        }}
-      >
+        }}>
         {boxes.map((data, i) => (
           <button
             key={i}
@@ -139,8 +126,7 @@ export default function Bored({ play }) {
                   : 'white',
               color: data && data === 'X' ? 'white' : '#282829',
             }}
-            onClick={() => onClickHandler(i)}
-          >
+            onClick={() => onClickHandler(i)}>
             {data}
           </button>
         ))}
@@ -155,45 +141,48 @@ export default function Bored({ play }) {
           height: '240px',
           width: '240px',
           margin: '1.9%',
-        }}
-      >
+          alignContent: 'space-around',
+        }}>
         <h1
           style={{
             margin: '0',
             width: '100%',
             fontSize: '48px',
-            fontWeight: '500',
-          }}
-        >
+            fontWeight: 500,
+          }}>
           Score Bored
         </h1>
-        <div style={{ width: '50%' }}>
-          <h2 style={{ margin: '0', fontSize: '40px', fontWeight: '400' }}>
-            X
-          </h2>
+        <div
+          style={{
+            width: '50%',
+            backgroundColor: ' #282c34',
+            padding: '20px 0',
+          }}>
+          <h2 style={{ margin: '0', fontSize: '40px', fontWeight: 400 }}>X</h2>
           <h3
             style={{
               margin: '0',
               fontSize: '30px',
               fontFamily: 'monospace',
-              fontWeight: '300',
-            }}
-          >
+              fontWeight: 300,
+            }}>
             {winnerX}
           </h3>
         </div>
-        <div style={{ width: '50%' }}>
-          <h2 style={{ margin: '0', fontSize: '40px', fontWeight: '400' }}>
-            O
-          </h2>
+        <div
+          style={{
+            width: '50%',
+            backgroundColor: '#282c34',
+            padding: '20px 0',
+          }}>
+          <h2 style={{ margin: '0', fontSize: '40px', fontWeight: 400 }}>O</h2>
           <h3
             style={{
               margin: '0',
               fontSize: '30px',
               fontFamily: 'monospace',
-              fontWeight: '300',
-            }}
-          >
+              fontWeight: 300,
+            }}>
             {winnerO}
           </h3>
         </div>
