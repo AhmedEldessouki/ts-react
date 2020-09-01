@@ -1,9 +1,10 @@
-import { css } from '@emotion/core';
+/* eslint-disable prettier/prettier */
+import { css } from '@emotion/core'
 
 export const app = css`
   text-align: center;
   font-family: Serif;
-`;
+`
 export const appHeader = css`
   background-color: #282c34;
   min-height: 100vh;
@@ -13,7 +14,7 @@ export const appHeader = css`
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-`;
+`
 
 export const btn1Style = css`
   color: whitesmoke;
@@ -24,7 +25,7 @@ export const btn1Style = css`
   padding: 0.8%;
   border-radius: 20%;
   width: 42%;
-`;
+`
 
 export const btn2Bored = css`
   width: 100px;
@@ -32,7 +33,7 @@ export const btn2Bored = css`
   font-size: 5rem;
   font-weight: bolder;
   margin: 0;
-`;
+`
 
 export const outerWrapper = css`
   display: flex;
@@ -42,7 +43,7 @@ export const outerWrapper = css`
   justify-items: center;
   padding-bottom: 30px;
   align-content: 'space-around';
-`;
+`
 
 export const innerWrapper1 = css`
   display: flex;
@@ -54,7 +55,7 @@ export const innerWrapper1 = css`
   height: 240px;
   width: 240px;
   margin: 1.9%;
-`;
+`
 
 export const innerWrapperBored = css`
   display: flex;
@@ -64,50 +65,50 @@ export const innerWrapperBored = css`
   width: 300px;
   height: 300px;
   margin: 1.9%;
-`;
+`
 
 export const innerWrapperScore = css`
   width: 50%;
   background-color: #282c34;
   padding: 20px 0;
-`;
+`
 
 export const h1XL = css`
   font-size: 88px;
   margin: 0;
   padding-bottom: 20px;
-`;
+`
 
 export const h2XL = css`
   font-size: 4rem;
   text-align: center;
   margin: 0;
   width: 100%;
-`;
+`
 
 export const h2L = css`
   font-size: 38px;
   margin: 0;
   width: 100%;
   font-weight: 500;
-`;
+`
 
 export const h3L = css`
   margin: 0;
   font-size: 40px;
   font-weight: 400;
-`;
+`
 
 export const h4L = css`
   margin: 0;
   font-size: 30px;
   font-family: monospace;
   font-weight: 300;
-`;
+`
 
 export const sPaN = css`
   text-align: center;
   font-size: 7rem;
   margin: 0;
   width: 100%;
-`;
+`

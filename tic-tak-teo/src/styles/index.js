@@ -13,4 +13,4 @@ export {
   innerWrapperBored,
   innerWrapperScore,
   sPaN,
-} from './styles';
+} from './styles'

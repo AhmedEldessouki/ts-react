@@ -1,6 +1,8 @@
+/* eslint-disable no-nested-ternary */
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
-import { useState } from 'react';
+import { jsx } from '@emotion/core'
+import { useState } from 'react'
+
 import {
   outerWrapper,
   innerWrapper1,
@@ -12,17 +14,17 @@ import {
   h4L,
   sPaN,
   btn2Bored,
-} from '../styles';
+} from '../styles'
 
-export default function Bored({ play }) {
-  const [noOfClicks, setNoOfClicks] = useState(0);
-  const [winnerX, setWinnerX] = useState(0);
-  const [winnerO, setWinnerO] = useState(0);
+export default function Bored() {
+  const [noOfClicks, setNoOfClicks] = useState(0)
+  const [winnerX, setWinnerX] = useState(0)
+  const [winnerO, setWinnerO] = useState(0)
   const [mrHandler, setMrHandler] = useState({
     turn: 'X',
     player: true,
     isWinner: false,
-  });
+  })
   const [boxes, setBoxes] = useState([
     null,
     null,
@@ -33,7 +35,7 @@ export default function Bored({ play }) {
     null,
     null,
     null,
-  ]);
+  ])
   const winableLines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -43,31 +45,29 @@ export default function Bored({ play }) {
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6],
-  ];
+  ]
 
   function whoWon() {
-    console.log(`number of click   ${noOfClicks}`);
     winableLines.forEach(([a, b, c]) => {
       if (boxes[a] && boxes[a] === boxes[b] && boxes[a] === boxes[c]) {
-        console.log(`${mrHandler.turn} Wins -- XYZ`);
-        setNoOfClicks(noOfClicks * 0);
+        setNoOfClicks(noOfClicks * 0)
         if (mrHandler.turn === 'X') {
           setMrHandler({
             ...mrHandler,
             isWinner: true,
             player: true,
-          });
-          setWinnerX(winnerX + 1);
-          setBoxes([...Array(9).fill('')]);
+          })
+          setWinnerX(winnerX + 1)
+          setBoxes([...Array(9).fill('')])
         } else {
           setMrHandler({
             ...mrHandler,
             isWinner: true,
             player: false,
-          });
-          setWinnerO(winnerO + 1);
+          })
+          setWinnerO(winnerO + 1)
         }
-        setBoxes([...Array(9).fill('')]);
+        setBoxes([...Array(9).fill('')])
       } else if (
         noOfClicks === 8 &&
         boxes[a] &&
@@ -76,25 +76,23 @@ export default function Bored({ play }) {
         boxes[a] !== boxes[b] &&
         boxes[a] !== boxes[c]
       ) {
-        setNoOfClicks(noOfClicks * 0);
-        setMrHandler({ ...mrHandler, isWinner: true });
-        setBoxes([...Array(9).fill('')]);
+        setNoOfClicks(noOfClicks * 0)
+        setMrHandler({ ...mrHandler, isWinner: true })
+        setBoxes([...Array(9).fill('')])
       }
-    });
+    })
   }
 
   function onClickHandler(i) {
-    setNoOfClicks(noOfClicks + 1);
+    setNoOfClicks(noOfClicks + 1)
     if (!boxes[i] && mrHandler.player) {
-      boxes[i] = 'X';
-      console.log(`${i} - ${boxes[i]} and`);
-      setMrHandler({ isWinner: false, player: false, turn: 'O' });
-      whoWon();
+      boxes[i] = 'X'
+      setMrHandler({ isWinner: false, player: false, turn: 'O' })
+      whoWon()
     } else if (!boxes[i] && !mrHandler.player) {
-      boxes[i] = 'O';
-      setMrHandler({ isWinner: false, player: true, turn: 'X' });
-      whoWon();
-      console.log('after whoWon O  ' + boxes);
+      boxes[i] = 'O'
+      setMrHandler({ isWinner: false, player: true, turn: 'X' })
+      whoWon()
     }
   }
   return (
@@ -103,11 +101,13 @@ export default function Bored({ play }) {
         <h2 css={h2XL}>Turn</h2>
         <span css={sPaN}>{mrHandler.turn}</span>
       </div>
-      <div css={innerWrapperBored}>
+      <div css={innerWrapperBored} data-testid='X|O Bored'>
         {boxes.map((data, i) => (
           <button
+            // eslint-disable-next-line react/no-array-index-key
             key={i}
-            type='submit'
+            type='button'
+            data-testid={`Square ${i}`}
             css={btn2Bored}
             style={{
               background:
@@ -118,8 +118,7 @@ export default function Bored({ play }) {
                   : 'white',
               color: data && data === 'X' ? 'white' : '#282829',
             }}
-            onClick={() => onClickHandler(i)}
-          >
+            onClick={() => onClickHandler(i)}>
             {data}
           </button>
         ))}
@@ -131,8 +130,7 @@ export default function Bored({ play }) {
           flexDirection: `row`,
           flexWrap: 'wrap',
           alignContent: 'space-around',
-        }}
-      >
+        }}>
         <h2 css={h2L}>Score Bored</h2>
         <div css={innerWrapperScore}>
           <h3 css={h3L}>X</h3>
@@ -144,5 +142,5 @@ export default function Bored({ play }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
