@@ -13,4 +13,7 @@ export {
   innerWrapperBored,
   innerWrapperScore,
   sPaN,
+  btnFade,
+  btnGreen,
+  btn2BoredEffect,
 } from './styles';

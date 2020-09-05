@@ -29,9 +29,27 @@ export const btn1Style = css`
 export const btn2Bored = css`
   width: 100px;
   height: 100px;
+  margin: 0;
   font-size: 5rem;
   font-weight: bolder;
+  border: 2px solid #282c34;
+`;
+
+export const btn2BoredEffect = css`
+  @keyframes sample {
+    from {
+      width: 60px;
+      height: 60px;
+      margin: 15px;
+    }
+    to {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
   margin: 0;
+  animation: sample 1s ease-out;
 `;
 
 export const outerWrapper = css`
@@ -61,8 +79,8 @@ export const innerWrapperBored = css`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 300px;
-  height: 300px;
+  max-width: 300px;
+  max-height: 300px;
   margin: 1.9%;
 `;
 
@@ -110,4 +128,31 @@ export const sPaN = css`
   font-size: 7rem;
   margin: 0;
   width: 100%;
+`;
+
+export const btnGreen = css`
+  @keyframes wins {
+    from {
+      background-color: inherit;
+    }
+    to {
+      background-color: #228b22;
+    }
+  }
+
+  background-color: #228b22;
+  animation: wins 1.5s ease-in-out;
+`;
+
+export const btnFade = css`
+  @keyframes loses {
+    from {
+      background-color: inherit;
+    }
+    to {
+      background-color: #dfe0e1;
+    }
+  }
+  background-color: #dfe0e1;
+  animation: loses 1.5s ease-in-out;
 `;
