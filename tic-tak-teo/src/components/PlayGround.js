@@ -4,17 +4,22 @@ import { useState, Fragment } from 'react';
 
 import Bored from './Bored';
 import { btn1Style, h1XL } from '../styles';
+import Button from './Button';
 
 export default function PlayGround() {
   const [play, setPlay] = useState(false);
-
+  function handleOnClick() {
+    setPlay(true);
+  }
   return (
     <Fragment>
-      <h1 css={h1XL}>Tic Tak Teo</h1>
+      <h1 css={h1XL}>Tic Tak Toe</h1>
       {!play ? (
-        <button type='button' css={btn1Style} onClick={() => setPlay(true)}>
-          Game Start
-        </button>
+        <Fragment>
+          <Button type='button' cssMe={btn1Style} doThis={handleOnClick}>
+            Start Game
+          </Button>
+        </Fragment>
       ) : (
         <Bored play={play} />
       )}

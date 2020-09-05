@@ -12,7 +12,11 @@ import {
   h4L,
   sPaN,
   btn2Bored,
+  btnFade,
+  btnGreen,
+  btn2BoredEffect,
 } from '../styles';
+import Button from './Button';
 
 export default function Bored({ play }) {
   const [noOfClicks, setNoOfClicks] = useState(0);
@@ -21,9 +25,20 @@ export default function Bored({ play }) {
   const [mrHandler, setMrHandler] = useState({
     turn: 'X',
     player: true,
-    isWinner: false,
+    playEffect: true,
   });
   const [boxes, setBoxes] = useState([
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ]);
+  const [bg, setBg] = useState([
     null,
     null,
     null,
@@ -46,28 +61,44 @@ export default function Bored({ play }) {
   ];
 
   function whoWon() {
-    console.log(`number of click   ${noOfClicks}`);
     winableLines.forEach(([a, b, c]) => {
       if (boxes[a] && boxes[a] === boxes[b] && boxes[a] === boxes[c]) {
-        console.log(`${mrHandler.turn} Wins -- XYZ`);
         setNoOfClicks(noOfClicks * 0);
+        setBg([
+          ...bg.map((data, i) =>
+            i === a
+              ? (data = btnGreen)
+              : i === b
+              ? (data = btnGreen)
+              : i === c
+              ? (data = btnGreen)
+              : (data = btnFade)
+          ),
+        ]);
+
         if (mrHandler.turn === 'X') {
-          setMrHandler({
-            ...mrHandler,
-            isWinner: true,
-            player: true,
-          });
           setWinnerX(winnerX + 1);
-          setBoxes([...Array(9).fill('')]);
+
+          // execute after Winner Animation
+          setTimeout(() => {
+            setMrHandler({
+              ...mrHandler,
+              player: true,
+            });
+            setBoxes([...Array(9).fill('')]);
+          }, 1500);
         } else {
-          setMrHandler({
-            ...mrHandler,
-            isWinner: true,
-            player: false,
-          });
           setWinnerO(winnerO + 1);
+
+          // execute after Winner Animation
+          setTimeout(() => {
+            setMrHandler({
+              ...mrHandler,
+              player: false,
+            });
+            setBoxes([...Array(9).fill('')]);
+          }, 1500);
         }
-        setBoxes([...Array(9).fill('')]);
       } else if (
         noOfClicks === 8 &&
         boxes[a] &&
@@ -76,25 +107,29 @@ export default function Bored({ play }) {
         boxes[a] !== boxes[b] &&
         boxes[a] !== boxes[c]
       ) {
-        setNoOfClicks(noOfClicks * 0);
-        setMrHandler({ ...mrHandler, isWinner: true });
-        setBoxes([...Array(9).fill('')]);
+        setBg([...Array(9).fill(btnGreen)]);
+
+        // execute after Winner Animation
+        setTimeout(() => {
+          setNoOfClicks(noOfClicks * 0);
+          setBoxes([...Array(9).fill('')]);
+        }, 1500);
       }
     });
+    console.log(bg);
   }
 
   function onClickHandler(i) {
     setNoOfClicks(noOfClicks + 1);
+    setBg([...Array(9).fill(null)]);
     if (!boxes[i] && mrHandler.player) {
       boxes[i] = 'X';
-      console.log(`${i} - ${boxes[i]} and`);
-      setMrHandler({ isWinner: false, player: false, turn: 'O' });
+      setMrHandler({ playEffect: false, player: false, turn: 'O' });
       whoWon();
     } else if (!boxes[i] && !mrHandler.player) {
       boxes[i] = 'O';
-      setMrHandler({ isWinner: false, player: true, turn: 'X' });
+      setMrHandler({ playEffect: false, player: true, turn: 'X' });
       whoWon();
-      console.log('after whoWon O  ' + boxes);
     }
   }
   return (
@@ -105,11 +140,14 @@ export default function Bored({ play }) {
       </div>
       <div css={innerWrapperBored}>
         {boxes.map((data, i) => (
-          <button
+          <Button
             key={i}
-            type='submit'
-            css={btn2Bored}
-            style={{
+            cssMe={[
+              btn2Bored,
+              bg[i],
+              mrHandler.playEffect ? btn2BoredEffect : null,
+            ]}
+            styleMe={{
               background:
                 data && data === 'X'
                   ? '#282829'
@@ -118,10 +156,10 @@ export default function Bored({ play }) {
                   : 'white',
               color: data && data === 'X' ? 'white' : '#282829',
             }}
-            onClick={() => onClickHandler(i)}
+            doThis={() => onClickHandler(i)}
           >
-            {data}
-          </button>
+            <span>{data}</span>
+          </Button>
         ))}
       </div>
       <div
