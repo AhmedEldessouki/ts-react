@@ -30,9 +30,14 @@ export const btn2Bored = css`
   width: 100px;
   height: 100px;
   margin: 0;
+  padding: 0;
   font-size: 5rem;
   font-weight: bolder;
   border: 2px solid #282c34;
+  &:after {
+    padding: 0;
+    margin: 0;
+  }
 `;
 
 export const btn2BoredEffect = css`
@@ -79,8 +84,8 @@ export const innerWrapperBored = css`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  max-width: 300px;
-  max-height: 300px;
+  width: 300px;
+  height: 300px;
   margin: 1.9%;
 `;
 
