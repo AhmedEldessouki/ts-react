@@ -145,7 +145,7 @@ export default function Bored({ play }) {
             cssMe={[
               btn2Bored,
               bg[i],
-              mrHandler.playEffect ? btn2BoredEffect : null,
+              mrHandler.playEffect ? btn2BoredEffect : '',
             ]}
             styleMe={{
               background:
@@ -158,7 +158,7 @@ export default function Bored({ play }) {
             }}
             doThis={() => onClickHandler(i)}
           >
-            <span>{data}</span>
+            {data}
           </Button>
         ))}
       </div>
