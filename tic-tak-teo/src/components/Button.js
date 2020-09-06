@@ -1,7 +1,7 @@
 /**@jsx jsx */
 import { jsx } from '@emotion/core';
 
-function Button({ children, doThis, styleMe, cssMe }) {
+function Button({ children, doThis, styleMe, cssMe, disabledB }) {
   const audioEl = new Audio('/onCLICK.mp3');
 
   return (
@@ -13,6 +13,7 @@ function Button({ children, doThis, styleMe, cssMe }) {
       onMouseDown={() => {
         audioEl.play();
       }}
+      disabled={disabledB}
     >
       {children && children}
     </button>

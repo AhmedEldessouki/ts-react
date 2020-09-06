@@ -26,6 +26,7 @@ export default function Bored({ play }) {
     turn: 'X',
     player: true,
     playEffect: true,
+    disableB: false,
   });
   const [boxes, setBoxes] = useState([
     null,
@@ -77,6 +78,7 @@ export default function Bored({ play }) {
         ]);
 
         if (mrHandler.turn === 'X') {
+          setMrHandler({ ...mrHandler, disableB: true });
           setWinnerX(winnerX + 1);
 
           // execute after Winner Animation
@@ -84,10 +86,12 @@ export default function Bored({ play }) {
             setMrHandler({
               ...mrHandler,
               player: true,
+              disableB: false,
             });
             setBoxes([...Array(9).fill('')]);
           }, 1500);
         } else {
+          setMrHandler({ ...mrHandler, disableB: true });
           setWinnerO(winnerO + 1);
 
           // execute after Winner Animation
@@ -95,6 +99,7 @@ export default function Bored({ play }) {
             setMrHandler({
               ...mrHandler,
               player: false,
+              disableB: false,
             });
             setBoxes([...Array(9).fill('')]);
           }, 1500);
@@ -157,6 +162,7 @@ export default function Bored({ play }) {
               color: data && data === 'X' ? 'white' : '#282829',
             }}
             doThis={() => onClickHandler(i)}
+            disabledB={mrHandler.disableB}
           >
             {data}
           </Button>
