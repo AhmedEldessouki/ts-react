@@ -121,19 +121,32 @@ export default function Bored({ play }) {
         }, 1500);
       }
     });
-    console.log(bg);
   }
 
   function onClickHandler(i) {
+    setMrHandler({ ...mrHandler, disableB: true });
     setNoOfClicks(noOfClicks + 1);
     setBg([...Array(9).fill(null)]);
     if (!boxes[i] && mrHandler.player) {
       boxes[i] = 'X';
-      setMrHandler({ playEffect: false, player: false, turn: 'O' });
+      setMrHandler({
+        playEffect: false,
+        player: false,
+        turn: 'O',
+        disableB: false,
+      });
       whoWon();
     } else if (!boxes[i] && !mrHandler.player) {
       boxes[i] = 'O';
-      setMrHandler({ playEffect: false, player: true, turn: 'X' });
+      setMrHandler({
+        playEffect: false,
+        player: true,
+        turn: 'X',
+        disableB: false,
+      });
+      whoWon();
+    } else {
+      setMrHandler({ ...mrHandler, disableB: false });
       whoWon();
     }
   }

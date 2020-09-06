@@ -38,6 +38,9 @@ export const btn2Bored = css`
     padding: 0;
     margin: 0;
   }
+  &:disabled {
+    background-color: black;
+  }
 `;
 
 export const btn2BoredEffect = css`
