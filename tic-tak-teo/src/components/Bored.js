@@ -190,7 +190,7 @@ export default function Bored({ play }) {
           alignContent: 'space-around',
         }}
       >
-        <h2 css={h2L}>Score Bored</h2>
+        <h2 css={h2L}>Score Board</h2>
         <div css={innerWrapperScore}>
           <h3 css={h3L}>X</h3>
           <h4 css={h4L}>{winnerX}</h4>
