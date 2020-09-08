@@ -1,3 +1,6 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
 /* eslint-disable no-nested-ternary */
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
@@ -14,7 +17,12 @@ import {
   h4L,
   sPaN,
   btn2Bored,
+  btnFade,
+  btnGreen,
+  btn2BoredEffect,
 } from '../styles'
+
+import Button from './Button'
 
 export default function Bored() {
   const [noOfClicks, setNoOfClicks] = useState(0)
@@ -23,9 +31,21 @@ export default function Bored() {
   const [mrHandler, setMrHandler] = useState({
     turn: 'X',
     player: true,
-    isWinner: false,
+    playEffect: true,
+    disableB: false,
   })
   const [boxes, setBoxes] = useState([
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ])
+  const [bg, setBg] = useState([
     null,
     null,
     null,
@@ -51,23 +71,45 @@ export default function Bored() {
     winableLines.forEach(([a, b, c]) => {
       if (boxes[a] && boxes[a] === boxes[b] && boxes[a] === boxes[c]) {
         setNoOfClicks(noOfClicks * 0)
+        setBg([
+          ...bg.forEach((data, i) =>
+            i === a
+              ? (data = btnGreen)
+              : i === b
+              ? (data = btnGreen)
+              : i === c
+              ? (data = btnGreen)
+              : (data = btnFade)
+          ),
+        ])
+
         if (mrHandler.turn === 'X') {
-          setMrHandler({
-            ...mrHandler,
-            isWinner: true,
-            player: true,
-          })
+          setMrHandler({ ...mrHandler, disableB: true })
           setWinnerX(winnerX + 1)
-          setBoxes([...Array(9).fill('')])
+
+          // execute after Winner Animation
+          setTimeout(() => {
+            setMrHandler({
+              ...mrHandler,
+              player: true,
+              disableB: false,
+            })
+            setBoxes([...Array(9).fill('')])
+          }, 1500)
         } else {
-          setMrHandler({
-            ...mrHandler,
-            isWinner: true,
-            player: false,
-          })
+          setMrHandler({ ...mrHandler, disableB: true })
           setWinnerO(winnerO + 1)
+
+          // execute after Winner Animation
+          setTimeout(() => {
+            setMrHandler({
+              ...mrHandler,
+              player: false,
+              disableB: false,
+            })
+            setBoxes([...Array(9).fill('')])
+          }, 1500)
         }
-        setBoxes([...Array(9).fill('')])
       } else if (
         noOfClicks === 8 &&
         boxes[a] &&
@@ -76,22 +118,41 @@ export default function Bored() {
         boxes[a] !== boxes[b] &&
         boxes[a] !== boxes[c]
       ) {
-        setNoOfClicks(noOfClicks * 0)
-        setMrHandler({ ...mrHandler, isWinner: true })
-        setBoxes([...Array(9).fill('')])
+        setBg([...Array(9).fill(btnGreen)])
+
+        // execute after Winner Animation
+        setTimeout(() => {
+          setNoOfClicks(noOfClicks * 0)
+          setBoxes([...Array(9).fill('')])
+        }, 1500)
       }
     })
   }
 
   function onClickHandler(i) {
+    setMrHandler({ ...mrHandler, disableB: true })
     setNoOfClicks(noOfClicks + 1)
+    setBg([...Array(9).fill(null)])
     if (!boxes[i] && mrHandler.player) {
       boxes[i] = 'X'
-      setMrHandler({ isWinner: false, player: false, turn: 'O' })
+      setMrHandler({
+        playEffect: false,
+        player: false,
+        turn: 'O',
+        disableB: false,
+      })
       whoWon()
     } else if (!boxes[i] && !mrHandler.player) {
       boxes[i] = 'O'
-      setMrHandler({ isWinner: false, player: true, turn: 'X' })
+      setMrHandler({
+        playEffect: false,
+        player: true,
+        turn: 'X',
+        disableB: false,
+      })
+      whoWon()
+    } else {
+      setMrHandler({ ...mrHandler, disableB: false })
       whoWon()
     }
   }
@@ -103,13 +164,14 @@ export default function Bored() {
       </div>
       <div css={innerWrapperBored} data-testid='X|O Bored'>
         {boxes.map((data, i) => (
-          <button
-            // eslint-disable-next-line react/no-array-index-key
+          <Button
             key={i}
-            type='button'
-            data-testid={`Square ${i}`}
-            css={btn2Bored}
-            style={{
+            cssMe={[
+              btn2Bored,
+              bg[i],
+              mrHandler.playEffect ? btn2BoredEffect : '',
+            ]}
+            styleMe={{
               background:
                 data && data === 'X'
                   ? '#282829'
@@ -118,9 +180,11 @@ export default function Bored() {
                   : 'white',
               color: data && data === 'X' ? 'white' : '#282829',
             }}
-            onClick={() => onClickHandler(i)}>
+            doThis={() => onClickHandler(i)}
+            disabledB={mrHandler.disableB}
+            nameForTest={`button-${i}`}>
             {data}
-          </button>
+          </Button>
         ))}
       </div>
       <div
@@ -131,7 +195,7 @@ export default function Bored() {
           flexWrap: 'wrap',
           alignContent: 'space-around',
         }}>
-        <h2 css={h2L}>Score Bored</h2>
+        <h2 css={h2L}>Score Board</h2>
         <div css={innerWrapperScore}>
           <h3 css={h3L}>X</h3>
           <h4 css={h4L}>{winnerX}</h4>

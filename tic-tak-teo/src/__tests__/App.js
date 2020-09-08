@@ -6,6 +6,6 @@ import App from '../App'
 
 test('App Rendered', () => {
   const { getByText } = render(<App />)
-  const titleEl = getByText(/Tic Tac Teo/i)
+  const titleEl = getByText(/Tic Tak Toe/i)
   expect(titleEl).toBeTruthy()
 })

@@ -10,13 +10,13 @@ describe('PlayGround component', () => {
 
   test('PlayGround works', () => {
     const { getByText } = render(<PlayGround />)
-    const titleEL = getByText(/tic tac teo/i)
+    const titleEL = getByText(/tic tak toe/i)
     expect(titleEL).toBeTruthy()
   })
   test('PlayGround button', () => {
     // const { getByTestId } = render(<PlayGround />);
     const buttonEL = render(<PlayGround />).getByTestId(
-      /[data-testId='start']/i
+      /[data-testId='startButton']/i
     )
     expect(buttonEL).toBeTruthy()
     fireEvent.click(buttonEL)
