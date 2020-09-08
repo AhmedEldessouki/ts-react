@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
  * @param {String} nameForTest - Test-id
  */
 function Button({ children, doThis, styleMe, cssMe, disabledB, nameForTest }) {
-  const audioEl = new Audio('/onCLICK.mp3')
+  // const audioEl = new Audio('/onCLICK.mp3')
 
   return (
     <button
@@ -19,9 +19,9 @@ function Button({ children, doThis, styleMe, cssMe, disabledB, nameForTest }) {
       css={cssMe}
       style={styleMe}
       onClick={doThis}
-      onMouseDown={() => {
-        audioEl.play()
-      }}
+      // onMouseDown={() => {
+      //   audioEl.play()
+      // }}
       disabled={disabledB}
       data-testid={nameForTest}>
       {children && children}

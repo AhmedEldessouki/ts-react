@@ -5,14 +5,12 @@ import { useState, Fragment } from 'react'
 
 import { btn1Style, h1XL } from '../styles'
 
-import Bored from './Bored'
+import Board from './Board'
 import Button from './Button'
 
 export default function PlayGround() {
   const [play, setPlay] = useState(false)
-  function handleOnClick() {
-    setPlay(true)
-  }
+  function handleOnClick() {}
   return (
     <Fragment>
       <h1 css={h1XL}>Tic Tak Toe</h1>
@@ -21,13 +19,13 @@ export default function PlayGround() {
           <Button
             type='button'
             cssMe={btn1Style}
-            doThis={handleOnClick}
+            doThis={() => setPlay(true)}
             nameForTest='startButton'>
             Start Game
           </Button>
         </Fragment>
       ) : (
-        <Bored play={play} />
+        <Board play={play} />
       )}
     </Fragment>
   )

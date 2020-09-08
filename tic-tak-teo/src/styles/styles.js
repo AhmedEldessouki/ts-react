@@ -26,7 +26,7 @@ export const btn1Style = css`
   width: 42%;
 `
 
-export const btn2Bored = css`
+export const btn2Board = css`
   width: 100px;
   height: 100px;
   margin: 0;
@@ -43,7 +43,7 @@ export const btn2Bored = css`
   }
 `
 
-export const btn2BoredEffect = css`
+export const btn2BoardEffect = css`
   @keyframes sample {
     from {
       width: 60px;
@@ -83,7 +83,7 @@ export const innerWrapper1 = css`
   margin: 1.9%;
 `
 
-export const innerWrapperBored = css`
+export const innerWrapperBoard = css`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

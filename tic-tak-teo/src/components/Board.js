@@ -9,22 +9,22 @@ import { useState } from 'react'
 import {
   outerWrapper,
   innerWrapper1,
-  innerWrapperBored,
+  innerWrapperBoard,
   innerWrapperScore,
   h2XL,
   h2L,
   h3L,
   h4L,
   sPaN,
-  btn2Bored,
+  btn2Board,
   btnFade,
   btnGreen,
-  btn2BoredEffect,
+  btn2BoardEffect,
 } from '../styles'
 
 import Button from './Button'
 
-export default function Bored() {
+export default function Board() {
   const [noOfClicks, setNoOfClicks] = useState(0)
   const [winnerX, setWinnerX] = useState(0)
   const [winnerO, setWinnerO] = useState(0)
@@ -162,14 +162,14 @@ export default function Bored() {
         <h2 css={h2XL}>Turn</h2>
         <span css={sPaN}>{mrHandler.turn}</span>
       </div>
-      <div css={innerWrapperBored} data-testid='X|O Bored'>
+      <div css={innerWrapperBoard} data-testid='X|O Board'>
         {boxes.map((data, i) => (
           <Button
             key={i}
             cssMe={[
-              btn2Bored,
+              btn2Board,
               bg[i],
-              mrHandler.playEffect ? btn2BoredEffect : '',
+              mrHandler.playEffect ? btn2BoardEffect : '',
             ]}
             styleMe={{
               background:
@@ -198,11 +198,15 @@ export default function Bored() {
         <h2 css={h2L}>Score Board</h2>
         <div css={innerWrapperScore}>
           <h3 css={h3L}>X</h3>
-          <h4 css={h4L}>{winnerX}</h4>
+          <h4 data-testid='X-wins' css={h4L}>
+            {winnerX}
+          </h4>
         </div>
         <div css={innerWrapperScore}>
           <h3 css={h3L}>O</h3>
-          <h4 css={h4L}>{winnerO}</h4>
+          <h4 data-testid='O-wins' css={h4L}>
+            {winnerO}
+          </h4>
         </div>
       </div>
     </div>
