@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
  *
  * @param {Function} doThis  - Function to handle onClick
  * @param {Object} styleMe - Button inline style
- * @param {Object} cssMe - Button css for emotion/core
+ * @param {import('@emotion/core').SerializedStyles} cssMe - Button css for emotion/core
  * @param {Boolean} disabledB - Button Disabled
  * @param {String} nameForTest - Test-id
  */
@@ -33,13 +33,14 @@ Button.defaultProps = {
   styleMe: null,
   disabledB: false,
   nameForTest: null,
+  children: 'button',
 }
 
 Button.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   doThis: PropTypes.func.isRequired,
   styleMe: PropTypes.object,
-  cssMe: PropTypes.object.isRequired,
+  cssMe: PropTypes.any.isRequired,
   disabledB: PropTypes.bool,
   nameForTest: PropTypes.string,
 }

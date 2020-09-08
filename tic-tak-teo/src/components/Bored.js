@@ -72,7 +72,7 @@ export default function Bored() {
       if (boxes[a] && boxes[a] === boxes[b] && boxes[a] === boxes[c]) {
         setNoOfClicks(noOfClicks * 0)
         setBg([
-          ...bg.forEach((data, i) =>
+          ...bg.map((data, i) =>
             i === a
               ? (data = btnGreen)
               : i === b

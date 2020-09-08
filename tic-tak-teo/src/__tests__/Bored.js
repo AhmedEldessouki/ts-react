@@ -10,15 +10,15 @@ test('App Rendered', () => {
   const { queryByTestId, getByTestId, getAllByTestId } = render(<Bored />)
   const containerEl = getByTestId(/X|O Bored/i)
   const buttons = [
-    'Square 0',
-    'Square 1',
-    'Square 2',
-    'Square 3',
-    'Square 4',
-    'Square 5',
-    'Square 6',
-    'Square 7',
-    'Square 8',
+    'button-0',
+    'button-1',
+    'button-2',
+    'button-3',
+    'button-4',
+    'button-5',
+    'button-6',
+    'button-7',
+    'button-8',
   ]
 
   expect(containerEl).toBeTruthy()
