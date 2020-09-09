@@ -59,6 +59,7 @@ export const btn2BoardEffect = css`
   margin: 0;
 
   animation: sample 1s ease-out;
+  animation-iteration-count: 1;
 `
 
 export const outerWrapper = css`
@@ -151,6 +152,7 @@ export const btnGreen = css`
 
   background-color: #228b22;
   animation: wins 1.5s ease-in-out;
+  animation-iteration-count: 1;
 `
 
 export const btnFade = css`

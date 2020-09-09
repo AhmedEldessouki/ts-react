@@ -10,7 +10,6 @@ import Button from './Button'
 
 export default function PlayGround() {
   const [play, setPlay] = useState(false)
-  function handleOnClick() {}
   return (
     <Fragment>
       <h1 css={h1XL}>Tic Tak Toe</h1>

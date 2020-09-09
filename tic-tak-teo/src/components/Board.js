@@ -83,7 +83,7 @@ export default function Board() {
           ),
         ])
 
-        if (mrHandler.turn === 'X') {
+        if (mrHandler.disableB === false && mrHandler.turn === 'X') {
           setMrHandler({ ...mrHandler, disableB: true })
           setWinnerX(winnerX + 1)
 
@@ -96,7 +96,7 @@ export default function Board() {
             })
             setBoxes([...Array(9).fill('')])
           }, 1500)
-        } else {
+        } else if (mrHandler.turn === 'O' && mrHandler.disableB === false) {
           setMrHandler({ ...mrHandler, disableB: true })
           setWinnerO(winnerO + 1)
 
@@ -112,6 +112,7 @@ export default function Board() {
         }
       } else if (
         noOfClicks === 8 &&
+        mrHandler.disableB === false &&
         boxes[a] &&
         boxes[b] &&
         boxes[c] &&
@@ -119,11 +120,16 @@ export default function Board() {
         boxes[a] !== boxes[c]
       ) {
         setBg([...Array(9).fill(btnGreen)])
+        setMrHandler({ ...mrHandler, disableB: true })
 
         // execute after Winner Animation
         setTimeout(() => {
           setNoOfClicks(noOfClicks * 0)
           setBoxes([...Array(9).fill('')])
+          setMrHandler({
+            ...mrHandler,
+            disableB: false,
+          })
         }, 1500)
       }
     })

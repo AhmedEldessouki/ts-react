@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from 'react'
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, cleanup, screen, rerender } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {
   toBeEmpty,
@@ -23,12 +23,15 @@ expect.extend({
   toHaveStyle,
   toBeDisabled,
 })
+
 describe('testing Board Component', () => {
   beforeEach(() => {
     render(<Board />)
+    jest.useFakeTimers()
   })
   afterEach(() => {
     cleanup()
+    jest.useFakeTimers()
   })
 
   const buttons = [
@@ -55,7 +58,7 @@ describe('testing Board Component', () => {
         expect(screen.queryByTestId(data)).toHaveAttribute('type', 'button')
         expect(screen.queryByTestId(data).innerHTML).toBe('X')
         expect(screen.queryByTestId(/turnNotify/i).innerHTML).toBe('O')
-        cleanup()
+        expect(setTimeout).toHaveBeenCalledTimes(1)
       })
     })
   })
@@ -71,6 +74,8 @@ describe('testing Board Component', () => {
         expect(screen.queryByTestId(/turnNotify/i).innerHTML).toBe('X')
         expect(screen.getByTestId('X-wins').innerHTML).toBe('1')
         expect(screen.getByTestId('O-wins').innerHTML).toBe('0')
+        expect(setTimeout).toHaveBeenCalledTimes(2)
+        expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 1500)
       } else if (i === 8) {
         expect(screen.queryByTestId(data)).toBeDisabled()
       } else if (i % 2 === 0) {
@@ -78,6 +83,8 @@ describe('testing Board Component', () => {
         if (i !== 6) {
           // when X wins!!
           expect(screen.queryByTestId(/turnNotify/i).innerHTML).toBe('O')
+          // css animation duration!
+          expect(setTimeout).toHaveBeenCalledTimes(1)
         } else {
           expect(screen.queryByTestId(/turnNotify/i).innerHTML).toBe('X')
         }
@@ -113,6 +120,9 @@ describe('testing Board Component', () => {
     expect(screen.queryByTestId(buttons[6]).innerHTML).toBe('O')
     expect(screen.queryByTestId(/turnNotify/i).innerHTML).toBe('O')
     expect(screen.queryByTestId(buttons[6])).toBeDisabled()
+
+    expect(setTimeout).toHaveBeenCalledTimes(2)
+    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 1500)
 
     expect(screen.getByTestId('O-wins').innerHTML).toBe('1')
     expect(screen.getByTestId('X-wins').innerHTML).toBe('0')
