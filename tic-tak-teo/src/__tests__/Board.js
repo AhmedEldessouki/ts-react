@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from 'react'
-import { render, cleanup, screen, rerender } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {
   toBeEmpty,
