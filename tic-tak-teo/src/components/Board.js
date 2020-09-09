@@ -160,9 +160,11 @@ export default function Board() {
     <div css={outerWrapper}>
       <div css={innerWrapper1}>
         <h2 css={h2XL}>Turn</h2>
-        <span css={sPaN}>{mrHandler.turn}</span>
+        <span css={sPaN} data-testid='turnNotify'>
+          {mrHandler.turn}
+        </span>
       </div>
-      <div css={innerWrapperBoard} data-testid='X|O Board'>
+      <div css={innerWrapperBoard}>
         {boxes.map((data, i) => (
           <Button
             key={i}
