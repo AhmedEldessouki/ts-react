@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
-import PlayGround from './components/PlayGround';
+import { jsx } from '@emotion/core'
 
-import { app, appHeader } from './styles';
+import PlayGround from './components/PlayGround'
+import { app, appHeader } from './styles'
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <PlayGround />
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
